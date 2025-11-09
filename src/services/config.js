@@ -1,4 +1,5 @@
-export const BASE_URL = 'https://api.assisthealth.cloud/users/api/v1';
+const URL = import.meta.env.VITE_API_URL ;
+export const BASE_URL = `https://${URL}/users/api/v1`;
 
 export const API_ENDPOINTS = {
   AUTH: {

@@ -1,7 +1,8 @@
 import axios from 'axios';
+const BASE_URL = import.meta.env.VITE_API_URL ;
 
 const instance = axios.create({
-  baseURL: 'https://api.assisthealth.cloud/users/api/v1',
+  baseURL: `https://${BASE_URL}/users/api/v1`,
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
