@@ -1,4 +1,4 @@
-import axios from "./axios";
+import api from "./axios";
 import { BASE_URL, getAuthHeaders, API_ENDPOINTS } from "./config";
 
 export const getSubprofiles = async (searchQuery = '') => {
@@ -8,9 +8,9 @@ export const getSubprofiles = async (searchQuery = '') => {
       console.error('No access token found in localStorage');
       throw new Error('Please login again to continue');
     }
-
-    const response = await axios.get(
-      `${BASE_URL}${API_ENDPOINTS.SUBPROFILES.LIST}${searchQuery ? `?search=${searchQuery}` : ''}`,
+    //${BASE_URL}
+    const response = await api.get(
+      `${API_ENDPOINTS.SUBPROFILES.LIST}${searchQuery ? `?search=${searchQuery}` : ''}`,
       {
         headers: getAuthHeaders()
       }
@@ -40,8 +40,8 @@ export const createSubprofile = async (subprofileData) => {
       throw new Error('Please login again to continue');
     }
 
-    const response = await axios.post(
-      `${BASE_URL}${API_ENDPOINTS.SUBPROFILES.CREATE}`,
+    const response = await api.post(
+      `${API_ENDPOINTS.SUBPROFILES.CREATE}`,
       subprofileData,
       {
         headers: getAuthHeaders()

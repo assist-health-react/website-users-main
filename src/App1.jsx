@@ -36,7 +36,7 @@ import MobilePaymentFailure from './components/Auth/MobilePaymentFailure';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import Subscription from './components/Auth/Subscription';
 import SubscriptionWrapper from './components/Auth/SubscriptionWrapper';
-import ForgotPassword from './components/ForgotPassword'
+
 // Public Pages
 import Index from './pages/Index';
 import About from './pages/About';
@@ -368,7 +368,6 @@ useEffect(() => {
             {/* Auth Routes - Public Access */}
             {/* <Route path="login" element={<Login />} /> */}
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="register" element={<LoginRegister />} />
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="refund-policy" element={<RefundPolicy />} />
@@ -441,7 +440,7 @@ useEffect(() => {
             />
 
             {/* Dashboard Routes - All Protected Routes with Sidebar */}
-            <Route
+          {/*   <Route
               path="dashboard"
               element={
                 <ProfileProvider>
@@ -462,7 +461,25 @@ useEffect(() => {
               <Route path="appointments" element={<Appointments1 />} />
               <Route path="ecommerce" element={<Ecommerce1 />} />
               <Route path="settings" element={<Settings />} />
-            </Route>
+            </Route> */}
+
+              {/* MAIN DASHBOARD ROUTES — FIXED */}
+          <Route path="/dashboard/*" element={<DashboardWrapper />}>
+            <Route index element={<Dashboard />} />
+            <Route path="medical-history" element={<MedicalHistory1 />} />
+            <Route path="assessment-report" element={<AssessmentReport2 />} />
+            <Route path="sub-profile" element={<SubProfile1 />} />
+            <Route path="navigators" element={<Navigators />} />
+            <Route path="doctors" element={<Doctors />} />
+            <Route path="prescription" element={<Prescription />} />
+            <Route path="appointments" element={<Appointments1 />} />
+            <Route path="ecommerce" element={<Ecommerce1 />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="profile" element={<ProfileForm1 />} />
+          </Route>
+
+          {/* CATCH ALL */}
+          <Route path="*" element={<Navigate to="/" replace />} />
 
             {/* 404 Route */}
             <Route path="*" element={<NotFound />} />

@@ -1,11 +1,11 @@
-import axios from "./axios";
+import api from "./axios";
 import { BASE_URL, getAuthHeaders, API_ENDPOINTS } from "./config";
-
 // Get all assessments
 export const getAssessments = async (filters = {}) => {
   try {
+    // Correct full URL with BASE_URL
     const url = new URL(`${BASE_URL}${API_ENDPOINTS.ASSESSMENTS.LIST}`);
-    
+
     // Add any filters to the URL as query parameters
     Object.keys(filters).forEach(key => {
       if (filters[key]) {
@@ -13,9 +13,13 @@ export const getAssessments = async (filters = {}) => {
       }
     });
 
-    const response = await axios.get(url.toString(), {
-      headers: getAuthHeaders(),
-    });
+    // FIX: axios instance already has BASE_URL set → so url.pathname is correct
+    const response = await api.get(
+      `${API_ENDPOINTS.ASSESSMENTS.LIST}?${url.searchParams.toString()}`,
+      {
+        headers: getAuthHeaders(),
+      }
+    );
 
     if (response.data?.status === "success" && response.data?.data) {
       return response.data.data;
@@ -30,6 +34,37 @@ export const getAssessments = async (filters = {}) => {
     throw new Error('Network error occurred while fetching assessments');
   }
 };
+
+// // Get all assessments
+// export const getAssessments = async (filters = {}) => {
+//   try {
+//     const url = new URL(`${BASE_URL}${API_ENDPOINTS.ASSESSMENTS.LIST}`);
+//     const url1 = new URL(`${API_ENDPOINTS.ASSESSMENTS.LIST}`);
+    
+//     // Add any filters to the URL as query parameters
+//     Object.keys(filters).forEach(key => {
+//       if (filters[key]) {
+//         url.searchParams.append(key, filters[key]);
+//       }
+//     });
+
+//     const response = await api.get(url1.toString(), {
+//       headers: getAuthHeaders(),
+//     });
+
+//     if (response.data?.status === "success" && response.data?.data) {
+//       return response.data.data;
+//     }
+    
+//     return [];
+//   } catch (error) {
+//     console.error('Get assessments error:', error.response || error);
+//     if (error.response) {
+//       throw new Error(error.response.data?.message || 'Failed to fetch assessments');
+//     }
+//     throw new Error('Network error occurred while fetching assessments');
+//   }
+// };
 
 // Get assessment by ID
 export const getAssessmentById = async (assessmentId) => {

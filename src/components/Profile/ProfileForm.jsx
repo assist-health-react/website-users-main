@@ -264,6 +264,7 @@ const ProfileForm = ({ onClose }) => {
         profilePic: formData.profilePic || '',
         name: formData.fullName || '',
         gender: formData.gender || '',
+        email: formData.email || '',
         dob: formData.dob || '',
         bloodGroup: formData.bloodGroup || '',
         heightInFt: parseFloat(formData.height) || 0,

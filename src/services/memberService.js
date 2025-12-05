@@ -1,4 +1,4 @@
-import axios from "./axios";
+import api from "./axios";
 import { BASE_URL, getAuthHeaders, getMultipartHeaders } from "./config";
 
 export const updateMemberProfile = async (profileData) => {
@@ -22,9 +22,9 @@ export const updateMemberProfile = async (profileData) => {
       });
 
       headers = getMultipartHeaders();
-      
-      const response = await axios.put(
-        `${BASE_URL}/members/profile`,
+      //${BASE_URL}
+      const response = await api.put(
+        `/members/profile`,
         formData,
         { headers }
       );
@@ -32,8 +32,8 @@ export const updateMemberProfile = async (profileData) => {
     }
 
     // If no profile picture, send regular JSON
-    const response = await axios.put(
-      `${BASE_URL}/members/profile`,
+    const response = await api.put(
+      `/members/profile`,
       profileData,
       { headers }
     );
@@ -49,8 +49,8 @@ export const updateMemberProfile = async (profileData) => {
 export const downloadMembershipCard = async () => {
   try {
     const headers = getAuthHeaders();
-    
-    const response = await axios.get(`${BASE_URL}/members/membership-card`, { headers });
+    //${BASE_URL}
+    const response = await api.get(`/members/membership-card`, { headers });
 
     if (response.data?.status === 'success' && response.data?.data?.success && response.data?.data?.s3Url) {
       // Open the S3 URL in a new tab
@@ -72,8 +72,8 @@ export const getMemberStats = async () => {
   try {
     const headers = getAuthHeaders();
     console.log('Fetching stats from:', `${BASE_URL}/stats`);
-    const response = await axios.get(
-      `${BASE_URL}/stats`, // Updated to correct endpoint
+    const response = await api.get(
+      `/stats`, // Updated to correct endpoint
       { headers }
     );
     

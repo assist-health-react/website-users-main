@@ -22,7 +22,7 @@ export default defineConfig({
     global: 'globalThis',
   },
   server: {
-    port: 3000,
+    port: 5001,
     strictPort: false, // This allows Vite to automatically try the next available port
     host: true,
     hmr: {

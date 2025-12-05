@@ -4,7 +4,7 @@ import { BASE_URL, getAuthHeaders, getMultipartHeaders, API_ENDPOINTS } from './
 export const profileService = {
   getProfile: async () => {
     try {
-      const response = await api.get('/members/profile');
+      const response = await api.get('/users/api/v1/members/profile');
       return response;
     } catch (error) {
       throw error;
@@ -46,17 +46,7 @@ export const profileService = {
 export const getMemberProfile = async () => {
   try {
     const headers = getAuthHeaders();
-    // console.log("START");
-    // console.log(headers);
-    
-    // console.log("END");
-    //${BASE_URL}
-    
-    const response = await api.get(`${API_ENDPOINTS.PROFILE.GET}`, { headers });
-     console.log("START 1");
-    console.log(response);
-    
-    console.log("END 1");
+    const response = await axios.get(`${BASE_URL}${API_ENDPOINTS.PROFILE.GET}`, { headers });
 
     // Check for error in response
     if (response.data.error) {
@@ -113,7 +103,7 @@ export const updateProfile = async (data) => {
     if (data.maritalStatus !== undefined) requestData.maritalStatus = data.maritalStatus;
     if (data.additionalInfo !== undefined) requestData.additionalInfo = data.additionalInfo;
 
-    const response = await api.put(`${BASE_URL}${API_ENDPOINTS.PROFILE.UPDATE}`, requestData, { headers });
+    const response = await axios.put(`${BASE_URL}${API_ENDPOINTS.PROFILE.UPDATE}`, requestData, { headers });
     
     // Return a standardized response format
     return {
@@ -137,7 +127,7 @@ export const uploadMedia = async (file) => {
     formData.append('file', file);
 
     const headers = getMultipartHeaders();
-    const response = await api.post(`${BASE_URL}/media/upload`, formData, { headers });
+    const response = await axios.post(`${BASE_URL}/media/upload`, formData, { headers });
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -150,7 +140,7 @@ export const uploadMedia = async (file) => {
 export const acceptTerms = async () => {
   try {
     const headers = getAuthHeaders();
-    const response = await api.post(
+    const response = await axios.post(
       `${BASE_URL}/members/accept-terms`,
       { termsConditionsAccepted: true },
       { headers }
@@ -169,7 +159,7 @@ export const acceptTerms = async () => {
 export const addAddress = async (address) => {
   try {
     const headers = getAuthHeaders();
-    const response = await api.put(
+    const response = await axios.put(
       `${BASE_URL}${API_ENDPOINTS.PROFILE.UPDATE}`,
       { address: [address] },
       { headers }
@@ -188,7 +178,7 @@ export const addAddress = async (address) => {
 export const getNavigatorDetails = async () => {
   try {
     const headers = getAuthHeaders();
-    const response = await api.get(`${BASE_URL}${API_ENDPOINTS.NAVIGATORS.DETAILS}`, { headers });
+    const response = await axios.get(`${BASE_URL}${API_ENDPOINTS.NAVIGATORS.DETAILS}`, { headers });
     return response.data;
   } catch (error) {
     if (error.response?.status === 401) {
@@ -203,7 +193,7 @@ export const getNavigatorDetails = async () => {
 export const getDoctorDetails = async () => {
   try {
     const headers = getAuthHeaders();
-    const response = await api.get(`${BASE_URL}${API_ENDPOINTS.DOCTORS.DETAILS}`, { headers });
+    const response = await axios.get(`${BASE_URL}${API_ENDPOINTS.DOCTORS.DETAILS}`, { headers });
     return response.data;
   } catch (error) {
     if (error.response?.status === 401) {

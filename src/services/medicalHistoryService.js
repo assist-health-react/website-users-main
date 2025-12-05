@@ -1,12 +1,13 @@
-import axios from "./axios";
+import api from "./axios";
 import { BASE_URL, getAuthHeaders, API_ENDPOINTS } from "./config";
 
 export const medicalHistoryService = {
   getAllMedicalHistory: async (searchQuery = '') => {
     try {
       console.log('Fetching medical histories with search:', searchQuery);
-      const response = await axios.get(
-        `${BASE_URL}${API_ENDPOINTS.MEDICAL_HISTORY.LIST}${searchQuery ? `?search=${searchQuery}` : ''}`,
+      
+      const response = await api.get(
+        `${API_ENDPOINTS.MEDICAL_HISTORY.LIST}${searchQuery ? `?search=${searchQuery}` : ''}`,
         { headers: getAuthHeaders() }
       );
       
@@ -28,8 +29,9 @@ export const medicalHistoryService = {
       }
 
       console.log('Fetching medical history for member:', memberId);
-      const response = await axios.get(
-        `${BASE_URL}${API_ENDPOINTS.MEDICAL_HISTORY.LIST}/${memberId}`,
+      
+      const response = await api.get(
+        `${API_ENDPOINTS.MEDICAL_HISTORY.LIST}/${memberId}`,
         { headers: getAuthHeaders() }
       );
       
@@ -51,8 +53,9 @@ export const medicalHistoryService = {
       }
 
       console.log('Updating medical history for member:', memberId, data);
-      const response = await axios.patch(
-        `${BASE_URL}${API_ENDPOINTS.MEDICAL_HISTORY.UPDATE}/${memberId}`,
+      
+      const response = await api.patch(
+        `${API_ENDPOINTS.MEDICAL_HISTORY.UPDATE}/${memberId}`,
         data,
         { headers: getAuthHeaders() }
       );
@@ -69,4 +72,4 @@ export const medicalHistoryService = {
   }
 };
 
-export default medicalHistoryService; 
+export default medicalHistoryService;
