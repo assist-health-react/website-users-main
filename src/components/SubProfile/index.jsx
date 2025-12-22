@@ -112,6 +112,40 @@ const SubProfile = () => {
     }
     return age;
   };
+//   const calculateAge = (dob) => {
+//     console.log(dob);
+    
+//   if (!dob) return null;
+
+//   // Normalize DOB to date-only (YYYY-MM-DD)
+//   const birth = new Date(dob);
+//   const birthDate = new Date(
+//     birth.getUTCFullYear(),
+//     birth.getUTCMonth(),
+//     birth.getUTCDate()
+//   );
+
+//   const today = new Date();
+//   const todayDate = new Date(
+//     today.getFullYear(),
+//     today.getMonth(),
+//     today.getDate()
+//   );
+
+//   let age = todayDate.getFullYear() - birthDate.getFullYear();
+
+//   const hasHadBirthdayThisYear =
+//     todayDate.getMonth() > birthDate.getMonth() ||
+//     (todayDate.getMonth() === birthDate.getMonth() &&
+//       todayDate.getDate() >= birthDate.getDate());
+
+//   if (!hasHadBirthdayThisYear) {
+//     age--;
+//   }
+//   console.log(age);
+
+//   return age < 0 ? 0 : age;
+// };
 
   const handleProfileClick = (profile) => {
     setSelectedProfile(profile);

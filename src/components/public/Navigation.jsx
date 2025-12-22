@@ -88,16 +88,17 @@ const Navigation = () => {
           <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={handleLogin}
-              className="text-sm font-medium text-ah-gray hover:text-ah-primary transition-colors duration-200"
+              className=" bg-[#0066cc] border-2 border-[#0066cc] text-white hover:bg-white hover:text-[#0066cc] transition-colors duration-200 text-lg px-4 py-3 h-auto rounded-xl font-semibold"
+             // className=" text-sm font-medium text-ah-gray hover:text-ah-primary transition-colors duration-200"
             >
               Login
             </button>
-            <button
+            {/* <button
               onClick={handleRegister}
               className="bg-ah-primary text-white px-6 py-2.5 rounded-md text-sm font-medium hover:bg-ah-light transition-colors duration-200"
             >
               Register
-            </button>
+            </button> */}
           </div>
 
           {/* Mobile Menu Button */}
@@ -136,12 +137,12 @@ const Navigation = () => {
             >
               Login
             </button>
-            <button
+            {/* <button
               onClick={handleRegister}
               className="block w-full text-left px-3 py-2 rounded-md text-base font-medium bg-ah-primary text-white hover:bg-ah-light"
             >
               Register
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

@@ -155,7 +155,7 @@ const AppContent = () => {
     { name: 'Dashboard', path: '/dashboard', icon: <FaChartBar />, color: 'text-purple-500' },
     { name: 'Medical History', path: '/dashboard/medical-history', icon: <FaNotesMedical />, color: 'text-red-500', hideForStudent: true },
     { name: 'Assessment Report', path: '/dashboard/assessment-report', icon: <FaClipboardCheck />, color: 'text-indigo-500' },
-    { name: 'My Sub Profiles', path: '/dashboard/sub-profile', icon: <FaUserFriends />, color: 'text-purple-500', hideForStudent: true },
+    { name: 'My Sub Profiles', path: '/dashboard/sub-profile', icon: <FaUserFriends />, color: 'text-purple-500', hideForStudent: false },
     { name: 'My Navigator', path: '/dashboard/navigators', icon: <FaCompass />, color: 'text-blue-500', hideForStudent: true },
     { name: 'My Doctor', path: '/dashboard/doctors', icon: <FaUserMd />, color: 'text-green-500', hideForStudent: true },
     { name: 'Prescription', path: '/dashboard/prescription', icon: <FaPrescriptionBottleAlt />, color: 'text-pink-500', hideForStudent: true },
@@ -393,7 +393,12 @@ useEffect(() => {
                 </ProtectedRoute>
               }
             />
-            <Route
+            <Route path="subscription/success" element={<SubscriptionSuccess/>} />
+            <Route path="subscription/failure" element={<SubscriptionFailure/>} />
+            <Route path="payment/success" element={<MobilePaymentSuccess/>} />
+            <Route path="payment/failure" element={<MobilePaymentFailure/>} />
+
+            {/* <Route
               path="subscription"
               element={
                 <ProfileProvider>
@@ -438,7 +443,7 @@ useEffect(() => {
                   <MobilePaymentFailure />
                 </ProtectedRoute>
               }
-            />
+            /> */}
 
             {/* Dashboard Routes - All Protected Routes with Sidebar */}
             <Route
