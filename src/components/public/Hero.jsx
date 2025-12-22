@@ -90,13 +90,13 @@ const Hero = () => {
               >
                 Login
               </Button>
-              <Button
+              {/* <Button
                 size="xl"
                 className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#0066cc] transition-colors duration-200 text-lg px-8 py-6 h-auto rounded-xl font-semibold"
                 onClick={handleRegister}
               >
                 Register Now
-              </Button>
+              </Button> */}
             </div>
 
             {/* Feature Icons */}
