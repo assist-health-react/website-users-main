@@ -1,0 +1,39 @@
+name: Deploy Admin Backend
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+           # ✅ SAFETY NET (NO HANGING)
+          timeout: 15m
+          command_timeout: 15m
+
+          script: |
+            set -e
+
+            echo "📂 Go to Website frontend repo"
+            cd /home/ec2-user/assist-health/website-users-main
+
+            echo "⬇ Pull latest code"
+            git pull origin main
+
+            echo "🐳 Build & restart Website frontend"
+            cd /home/ec2-user/assist-health
+            docker compose -f docker-compose.admin.yml build website_frontend
+            docker compose -f docker-compose.admin.yml up -d --build website_frontend
+          # script: |
+          #   rsync -av --delete $GITHUB_WORKSPACE/ ~/assist-health/website-users-main/
+          #   cd ~/assist-health
+          #   docker compose -f docker-compose.admin.yml build website_users
+          #   docker compose -f docker-compose.admin.yml up -d website_users
