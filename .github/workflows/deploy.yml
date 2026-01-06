@@ -30,8 +30,8 @@ jobs:
 
             echo "🐳 Build & restart Website frontend"
             cd /home/ec2-user/assist-health
-            docker compose -f docker-compose.admin.yml build website_frontend
-            docker compose -f docker-compose.admin.yml up -d --build website_frontend
+            docker compose -f docker-compose.users.yml build website_frontend
+            docker compose -f docker-compose.users.yml up -d --build website_frontend
           # script: |
           #   rsync -av --delete $GITHUB_WORKSPACE/ ~/assist-health/website-users-main/
           #   cd ~/assist-health
