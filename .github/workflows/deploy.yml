@@ -18,20 +18,36 @@ jobs:
            # ✅ SAFETY NET (NO HANGING)
           timeout: 15m
           command_timeout: 15m
-
           script: |
             set -e
 
             echo "📂 Go to Website frontend repo"
             cd /home/ec2-user/assist-health/website-users-main
 
+            echo "🧹 Clean local changes"
+            git reset --hard
+            git clean -fd
+
             echo "⬇ Pull latest code"
             git pull origin main
 
             echo "🐳 Build & restart Website frontend"
             cd /home/ec2-user/assist-health
-            docker compose -f docker-compose.users.yml build website_frontend
             docker compose -f docker-compose.users.yml up -d --build website_frontend
+          # script: |
+          #   set -e
+
+          #   echo "📂 Go to Website frontend repo"
+          #   cd /home/ec2-user/assist-health/website-users-main
+
+          #   echo "⬇ Pull latest code"
+          #   git pull origin main
+
+          #   echo "🐳 Build & restart Website frontend"
+          #   cd /home/ec2-user/assist-health
+          #   docker compose -f docker-compose.users.yml build website_frontend
+          #   docker compose -f docker-compose.users.yml up -d --build website_frontend
+
           # script: |
           #   rsync -av --delete $GITHUB_WORKSPACE/ ~/assist-health/website-users-main/
           #   cd ~/assist-health
