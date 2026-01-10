@@ -28,7 +28,9 @@
 FROM node:18-alpine AS build
 
 WORKDIR /app
-ENV NODE_OPTIONS=--max-old-space-size=512
+
+# 🔥 IMPORTANT: increase Node heap
+ENV NODE_OPTIONS=--max-old-space-size=2048
 
 COPY package*.json ./
 RUN npm install
