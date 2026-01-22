@@ -19,25 +19,54 @@ export const createAppointment = async (appointmentData) => {
 };
 
 // Get all appointments for a user
+// export const getAppointments = async (status = 'all', search = '') => {
+//   try {
+//     const url = new URL(`${BASE_URL}${API_ENDPOINTS.APPOINTMENTS.LIST}`);
+//     if (status && status !== 'all') {
+//       url.searchParams.append('status', status);
+//     }
+//     if (search && search.trim()) {
+//       url.searchParams.append('search', search.trim());
+//     }
+
+//     const response = await axios.get(url.toString(), {
+//       headers: getAuthHeaders(),
+//     });
+
+//     // Ensure we return an array even if the response is empty
+//     if (response.data?.data) {
+//       return response.data.data;
+//     }
+//     return [];
+//   } catch (error) {
+//     if (error.response) {
+//       throw new Error(error.response.data.message || 'Failed to fetch appointments');
+//     }
+//     throw new Error('Network error occurred');
+//   }
+// };
 export const getAppointments = async (status = 'all', search = '') => {
   try {
-    const url = new URL(`${BASE_URL}${API_ENDPOINTS.APPOINTMENTS.LIST}`);
+    let url = `${BASE_URL}${API_ENDPOINTS.APPOINTMENTS.LIST}`;
+
+    const params = new URLSearchParams();
+
     if (status && status !== 'all') {
-      url.searchParams.append('status', status);
+      params.append('status', status);
     }
     if (search && search.trim()) {
-      url.searchParams.append('search', search.trim());
+      params.append('search', search.trim());
     }
 
-    const response = await axios.get(url.toString(), {
+    if ([...params].length) {
+      url += `?${params.toString()}`;
+    }
+
+    const response = await axios.get(url, {
       headers: getAuthHeaders(),
     });
 
-    // Ensure we return an array even if the response is empty
-    if (response.data?.data) {
-      return response.data.data;
-    }
-    return [];
+    return response.data?.data || [];
   } catch (error) {
     if (error.response) {
       throw new Error(error.response.data.message || 'Failed to fetch appointments');

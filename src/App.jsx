@@ -19,7 +19,7 @@ import Ecommerce1 from './components/ecommerce';
 import Navigators from './components/Navigators';
 import Doctors from './components/Doctors';
 import Settings from './components/Settings';
-import Prescription from './components/prescription';
+//import Prescription from './components/prescription';
 
 // Auth Components
 import Login from './components/Auth/Login';
@@ -109,8 +109,8 @@ const Header = () => {
         return 'My Navigator';
       case '/doctors':
         return 'My Doctor';
-      case '/prescription':
-        return 'Prescriptions';
+      // case '/prescription':
+      //   return 'Prescriptions';
       case '/appointments':
         return 'Appointments';
       case '/ecommerce':
@@ -158,10 +158,10 @@ const AppContent = () => {
     { name: 'My Sub Profiles', path: '/dashboard/sub-profile', icon: <FaUserFriends />, color: 'text-purple-500', hideForStudent: false },
     { name: 'My Navigator', path: '/dashboard/navigators', icon: <FaCompass />, color: 'text-blue-500', hideForStudent: true },
     { name: 'My Doctor', path: '/dashboard/doctors', icon: <FaUserMd />, color: 'text-green-500', hideForStudent: true },
-    { name: 'Prescription', path: '/dashboard/prescription', icon: <FaPrescriptionBottleAlt />, color: 'text-pink-500', hideForStudent: true },
+    // { name: 'Prescription', path: '/dashboard/prescription', icon: <FaPrescriptionBottleAlt />, color: 'text-pink-500', hideForStudent: true },
     { name: 'Appointments', path: '/dashboard/appointments', icon: <FaCalendarAlt />, color: 'text-red-500', hideForStudent: true },
-    { name: 'E-commerce', path: '/dashboard/ecommerce', icon: <FaShoppingCart />, color: 'text-orange-500' },
-    { name: 'Subscription', path: '/dashboard/subscription', icon: <FaCrown />, color: 'text-yellow-500' },
+    // { name: 'E-commerce', path: '/dashboard/ecommerce', icon: <FaShoppingCart />, color: 'text-orange-500' },
+    // { name: 'Subscription', path: '/dashboard/subscription', icon: <FaCrown />, color: 'text-yellow-500' },
     { name: 'Settings', path: '/dashboard/settings', icon: <FaCog />, color: 'text-gray-500' },
   ];
 
@@ -463,7 +463,7 @@ useEffect(() => {
               <Route path="sub-profile" element={<SubProfile1 />} />
               <Route path="navigators" element={<Navigators />} />
               <Route path="doctors" element={<Doctors />} />
-              <Route path="prescription" element={<Prescription />} />
+              {/* <Route path="prescription" element={<Prescription />} /> */}
               <Route path="appointments" element={<Appointments1 />} />
               <Route path="ecommerce" element={<Ecommerce1 />} />
               <Route path="settings" element={<Settings />} />
