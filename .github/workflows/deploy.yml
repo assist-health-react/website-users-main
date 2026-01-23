@@ -110,7 +110,8 @@ jobs:
             set -e
 
             echo "📂 Go to website frontend repo"
-            cd /home/ec2-user/assist-health/website-frontend-master
+            cd /home/ec2-user/assist-health/website-users-main
+
 
             echo "⬇ Pull latest code"
             git pull origin main
