@@ -34,11 +34,59 @@
 #             echo "🐳 Build & restart Website frontend"
 #             cd /home/ec2-user/assist-health
 #             docker compose -f docker-compose.users.yml up -d --build website_frontend
+
+#old
+# name: Deploy Website Frontend
+
+# on:
+#   push:
+#     branches: [main]
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       - name: Build Docker image
+#         run: |
+#           docker build -t website-frontend:latest .
+#           docker save website-frontend:latest > website-frontend.tar
+
+#       - name: Copy image to EC2
+#         uses: appleboy/scp-action@v0.1.7
+#         with:
+#           host: ${{ secrets.EC2_HOST }}
+#           username: ${{ secrets.EC2_USER }}
+#           key: ${{ secrets.EC2_KEY }}
+#           source: "website-frontend.tar"
+#           target: "/home/ec2-user/"
+
+#       - name: Load image & restart container
+#         uses: appleboy/ssh-action@v1
+#         with:
+#           host: ${{ secrets.EC2_HOST }}
+#           username: ${{ secrets.EC2_USER }}
+#           key: ${{ secrets.EC2_KEY }}
+#           script: |
+#             cd /home/ec2-user
+#             docker load < website-frontend.tar
+#             cd /home/ec2-user/assist-health
+#             docker compose -f docker-compose.users.yml up -d website_frontend
+#23.1.26
 name: Deploy Website Frontend
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+
+# ✅ PREVENT PARALLEL DEPLOYS
+concurrency:
+  group: website-frontend-deploy
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -48,28 +96,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build Docker image
-        run: |
-          docker build -t website-frontend:latest .
-          docker save website-frontend:latest > website-frontend.tar
-
-      - name: Copy image to EC2
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
-          source: "website-frontend.tar"
-          target: "/home/ec2-user/"
-
-      - name: Load image & restart container
+      - name: Deploy to EC2
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
+
+          timeout: 15m
+          command_timeout: 15m
+
           script: |
-            cd /home/ec2-user
-            docker load < website-frontend.tar
+            set -e
+
+            echo "📂 Go to website frontend repo"
+            cd /home/ec2-user/assist-health/website-frontend-master
+
+            echo "⬇ Pull latest code"
+            git pull origin main
+
+            echo "🐳 Build & restart website frontend"
             cd /home/ec2-user/assist-health
+            docker compose -f docker-compose.users.yml build website_frontend
             docker compose -f docker-compose.users.yml up -d website_frontend

@@ -76,7 +76,8 @@ const api = axios.create({
   baseURL: `${BASE_URL}/users/api/v1`,
   headers: { "Content-Type": "application/json" }
 });
-
+console.log("API")
+console.log(api.baseURL)
 // attach token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("accessToken");
