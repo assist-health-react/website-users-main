@@ -112,7 +112,11 @@ jobs:
             echo "📂 Go to website frontend repo"
             cd /home/ec2-user/assist-health/website-users-main
 
-
+               echo "🧹 Reset any local server changes (CI/CD safety)"
+            git fetch origin
+            git reset --hard origin/main
+            git clean -fd
+            
             echo "⬇ Pull latest code"
             git pull origin main
 
