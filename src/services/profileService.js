@@ -5,6 +5,8 @@ export const profileService = {
   getProfile: async () => {
     try {
       const response = await api.get('/members/profile');
+      console.log("getProfile")
+      console.log(response)
       return response;
     } catch (error) {
       throw error;
@@ -43,48 +45,81 @@ export const profileService = {
   }
 };
 
+// export const getMemberProfile = async () => {
+//   try {
+//     const headers = getAuthHeaders();
+//     console.log("START");
+//     console.log(api.get());
+//          console.log(API_ENDPOINTS);
+//      console.log(API_ENDPOINTS.PROFILE.GET);
+//     console.log("END");
+//     //${BASE_URL}
+    
+//     const response = await api.get(`${API_ENDPOINTS.PROFILE.GET}`, { headers });
+//      console.log("START 1");
+//      console.log(API_ENDPOINTS);
+//      console.log(PROFILE);
+//     console.log(response.data);
+    
+//     console.log("END 1");
+
+//     // Check for error in response
+//     if (response.data.error) {
+//       throw new Error(response.data.error);
+//     }
+
+//     // Check for valid data
+//     if (!response.data.data) {
+//       throw new Error('No profile data received');
+//     }
+
+//     return response.data;
+//   } catch (error) {
+//     console.error('Get Member Profile Error:', error);
+
+//     // Handle authentication errors
+//     if (error.response?.status === 401) {
+//       localStorage.removeItem('accessToken');
+//       throw new Error('Session expired. Please login again.');
+//     }
+
+//     // Handle other API errors
+//     if (error.response?.data) {
+//       throw new Error(error.response.data.error || error.response.data.message || 'Failed to fetch profile');
+//     }
+
+//     // Handle network errors
+//     throw new Error(error.message || 'Network error occurred');
+//   }
+// };
 export const getMemberProfile = async () => {
   try {
     const headers = getAuthHeaders();
-    // console.log("START");
-    // console.log(headers);
-    
-    // console.log("END");
-    //${BASE_URL}
-    
-    const response = await api.get(`${API_ENDPOINTS.PROFILE.GET}`, { headers });
-     console.log("START 1");
-    console.log(response);
-    
-    console.log("END 1");
 
-    // Check for error in response
-    if (response.data.error) {
-      throw new Error(response.data.error);
-    }
+    console.log("API BASE:", import.meta.env.VITE_API_URL);
+    console.log("PROFILE ENDPOINT:", API_ENDPOINTS.PROFILE.GET);
 
-    // Check for valid data
-    if (!response.data.data) {
-      throw new Error('No profile data received');
-    }
+    const response = await api.get(
+      API_ENDPOINTS.PROFILE.GET,
+      { headers }
+    );
 
+    // ✅ return actual data safely
     return response.data;
+
   } catch (error) {
-    console.error('Get Member Profile Error:', error);
+    console.error("Get Member Profile Error:", error);
 
-    // Handle authentication errors
     if (error.response?.status === 401) {
-      localStorage.removeItem('accessToken');
-      throw new Error('Session expired. Please login again.');
+      localStorage.removeItem("accessToken");
+      throw new Error("Session expired. Please login again.");
     }
 
-    // Handle other API errors
-    if (error.response?.data) {
-      throw new Error(error.response.data.error || error.response.data.message || 'Failed to fetch profile');
-    }
-
-    // Handle network errors
-    throw new Error(error.message || 'Network error occurred');
+    throw new Error(
+      error.response?.data?.message ||
+      error.message ||
+      "Failed to fetch profile"
+    );
   }
 };
 

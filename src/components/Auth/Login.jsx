@@ -26,7 +26,7 @@ const Login = ({ onLogin }) => {
 
     try {
       const response = await login(email, password);
-      
+       console.log(response)
       // The response is already processed by the interceptor to return response.data
       if (response.status === 'success') {
         // Check if password reset is required
