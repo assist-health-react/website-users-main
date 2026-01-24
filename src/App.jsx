@@ -274,7 +274,11 @@ const AppContent = () => {
 };
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isAuthenticated') === 'true');
+  //const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isAuthenticated') === 'true');
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem('isAuthenticated') === 'true'
+  );
+  const [userName, setUserName] = useState('Admin');
    //2.12.25
   // 🔒 Auto logout after 30 minutes or token expiry
  // 🕒 Auto logout after 30 minutes of inactivity

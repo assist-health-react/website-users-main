@@ -51,9 +51,17 @@ const Login = ({ onLogin }) => {
 
         // Fetch profile information
         try {
+          // const profileResponse = await profileService.getProfile();
+          // if (profileResponse.status === 'success') {
+          //   localStorage.setItem('userProfile', JSON.stringify(profileResponse.data));
+          // }
           const profileResponse = await profileService.getProfile();
-          if (profileResponse.status === 'success') {
-            localStorage.setItem('userProfile', JSON.stringify(profileResponse.data));
+
+          if (profileResponse?.data) {
+            localStorage.setItem(
+              'userProfile',
+              JSON.stringify(profileResponse.data)
+            );
           }
         } catch (profileError) {
           console.error('Error fetching profile:', profileError);

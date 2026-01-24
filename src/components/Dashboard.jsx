@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { ProfileContext } from "../components/Profile/ProfileMenu";
 
 const Dashboard = () => {
-  console.log('Dashboard: Component rendering started');
+  //console.log('Dashboard: Component rendering started');
   
   const { activeProfile, loading: profileLoading, error: profileError } = useContext(ProfileContext);
   console.log('Dashboard: ProfileContext values:', { 
@@ -13,7 +13,8 @@ const Dashboard = () => {
     profileLoading, 
     profileError,
     activeProfileData: activeProfile 
-  });
+  }
+);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
