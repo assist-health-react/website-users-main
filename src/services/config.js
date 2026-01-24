@@ -1,8 +1,9 @@
-const URL = import.meta.env.VITE_API_URL ;
+//const URL = import.meta.env.VITE_API_URL ;
 //export const BASE_URL = `https://${URL}/users/api/v1`;
 //export const BASE_URL = `${import.meta.env.VITE_API_URL}/users/api/v1`;
 //export const BASE_URL = `${import.meta.env.VITE_API_URL}/users/api/v1`;
 //export const BASE_URL = `${import.meta.env.VITE_API_URL}`;
+export const BASE_URL = ``;
 
 export const API_ENDPOINTS = {
   AUTH: {
