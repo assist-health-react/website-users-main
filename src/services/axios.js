@@ -76,9 +76,12 @@ if (!BASE_URL) {
 console.log("$$$$$$$$$$$$$$$$$$")
 console.log(BASE_URL)
 // axios instance
+// const api = axios.create({
+//   baseURL: BASE_URL,//`${BASE_URL}/users/api/v1`,  //24.1.26
+//   headers: { "Content-Type": "application/json" }
+// });
 const api = axios.create({
-  baseURL: BASE_URL,//`${BASE_URL}/users/api/v1`,  //24.1.26
-  headers: { "Content-Type": "application/json" }
+  baseURL: import.meta.env.VITE_API_URL
 });
 console.log("API")
 console.log(api)

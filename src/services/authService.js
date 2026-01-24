@@ -51,7 +51,7 @@
 //   localStorage.removeItem('user');
 //   localStorage.removeItem('isAuthenticated');
 // }; 
-import api from './api';
+import api from './axios';
 
 export const login = async (email, password) => {
   try {
