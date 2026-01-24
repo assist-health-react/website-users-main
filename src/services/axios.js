@@ -70,14 +70,15 @@
 import axios from 'axios';
 
 const BASE_URL = import.meta.env.VITE_API_URL;
+console.log("$$$$$$$$$$$$$$$$$$")
 console.log(BASE_URL)
 // axios instance
 const api = axios.create({
-  baseURL: `${BASE_URL}/users/api/v1`,
+  baseURL: BASE_URL,//`${BASE_URL}/users/api/v1`,  //24.1.26
   headers: { "Content-Type": "application/json" }
 });
 console.log("API")
-console.log(api.baseURL)
+console.log(api)
 // attach token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("accessToken");
