@@ -81,7 +81,10 @@ console.log(BASE_URL)
 //   headers: { "Content-Type": "application/json" }
 // });
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL
+  baseURL: import.meta.env.VITE_API_URL, // "/api"
+  headers: {
+    "Content-Type": "application/json"
+  }
 });
 console.log("API")
 console.log(api)

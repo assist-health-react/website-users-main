@@ -92,35 +92,40 @@ export const profileService = {
 //     throw new Error(error.message || 'Network error occurred');
 //   }
 // };
+///----------------------------
+// export const getMemberProfile = async () => {
+//   try {
+//     const headers = getAuthHeaders();
+
+//     console.log("API BASE:", import.meta.env.VITE_API_URL);
+//     console.log("PROFILE ENDPOINT:", API_ENDPOINTS.PROFILE.GET);
+
+//     const response = await api.get(
+//       API_ENDPOINTS.PROFILE.GET,
+//       { headers }
+//     );
+
+//     // ✅ return actual data safely
+//     return response.data;
+
+//   } catch (error) {
+//     console.error("Get Member Profile Error:", error);
+
+//     if (error.response?.status === 401) {
+//       localStorage.removeItem("accessToken");
+//       throw new Error("Session expired. Please login again.");
+//     }
+
+//     throw new Error(
+//       error.response?.data?.message ||
+//       error.message ||
+//       "Failed to fetch profile"
+//     );
+//   }
+// };
 export const getMemberProfile = async () => {
-  try {
-    const headers = getAuthHeaders();
-
-    console.log("API BASE:", import.meta.env.VITE_API_URL);
-    console.log("PROFILE ENDPOINT:", API_ENDPOINTS.PROFILE.GET);
-
-    const response = await api.get(
-      API_ENDPOINTS.PROFILE.GET,
-      { headers }
-    );
-
-    // ✅ return actual data safely
-    return response.data;
-
-  } catch (error) {
-    console.error("Get Member Profile Error:", error);
-
-    if (error.response?.status === 401) {
-      localStorage.removeItem("accessToken");
-      throw new Error("Session expired. Please login again.");
-    }
-
-    throw new Error(
-      error.response?.data?.message ||
-      error.message ||
-      "Failed to fetch profile"
-    );
-  }
+  const response = await api.get("/members/profile");
+  return response.data;
 };
 
 export const updateProfile = async (data) => {

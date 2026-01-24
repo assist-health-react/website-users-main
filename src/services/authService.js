@@ -53,21 +53,29 @@
 // }; 
 import api from './axios';
 
-export const login = async (email, password) => {
-  try {
-    const response = await api.post('/auth/login', {
-      email,
-      password
-    });
 
-    // The response is already processed by the interceptor
-    // No need to check response.data as the interceptor returns the data directly
-    return response;
-  } catch (error) {
-    // If the error has a message, use it, otherwise use a default message
-    throw new Error(error.message || 'Login failed. Please try again.');
-  }
+export const login = async (email, password) => {
+  const response = await api.post("/auth/login", {
+    email,
+    password
+  });
+  return response.data;
 };
+// export const login = async (email, password) => {
+//   try {
+//     const response = await api.post('/auth/login', {
+//       email,
+//       password
+//     });
+
+//     // The response is already processed by the interceptor
+//     // No need to check response.data as the interceptor returns the data directly
+//     return response;
+//   } catch (error) {
+//     // If the error has a message, use it, otherwise use a default message
+//     throw new Error(error.message || 'Login failed. Please try again.');
+//   }
+// };
 
 export const forgotPassword = async (email) => {
   try {
